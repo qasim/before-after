@@ -42,6 +42,6 @@
   main();
 
   function main(): void {
-    alert(TEXT.greeting);
+    console.log(TEXT.greeting);
   }
 })();

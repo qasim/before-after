@@ -1,3 +1,10 @@
+# output directory (see package.json)
+public/
+
+# ignore parcel build directory
+dist/
+
+
 # Logs
 logs
 *.log

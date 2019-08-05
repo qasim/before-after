@@ -1,0 +1,25 @@
+{
+  "name": "before-after",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build -d public index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isthisnagee/before-after.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isthisnagee/before-after/issues"
+  },
+  "homepage": "https://github.com/isthisnagee/before-after#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.5.3"
+  }
+}

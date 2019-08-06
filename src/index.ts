@@ -22,6 +22,20 @@
   //
   // Each function should have its input and output types defined.
 
+  // *****
+  // TYPES
+  // *****
+  //
+  // This section will contain all shared types.
+
+  type Maybe<T> = T | null;
+
+  type FormValue = {
+    general: {
+      fileName: Maybe<string>;
+    };
+  };
+
   // *******
   // GLOBALS
   // *******
@@ -29,9 +43,22 @@
   // This section defines all HTML elements, magic numbers, and string constants.
 
   const TEXT = {
-    greeting: 'hello world',
+    initial: {fileName: 'before-v-after'},
   };
 
+  const FORM: FormValue = {
+    general: {
+      fileName: null,
+    },
+  };
+
+  const $ = {
+    general: {
+      fileName: document.getElementById(
+        'general--file-name',
+      ) as HTMLInputElement,
+    },
+  };
 
   // ****
   // MAIN
@@ -42,6 +69,15 @@
   main();
 
   function main(): void {
-    console.log(TEXT.greeting);
+    $.general.fileName.value = TEXT.initial.fileName;
+    $.general.fileName.onchange = handleFileNameChange;
+  }
+
+  // ********
+  // HANDLERS 
+  // ********
+  function handleFileNameChange(e: Event): void {
+    const currentValue = (e.currentTarget as HTMLInputElement).value;
+    FORM.general.fileName = currentValue;
   }
 })();

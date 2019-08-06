@@ -28,11 +28,9 @@
   //
   // This section will contain all shared types.
 
-  type Maybe<T> = T | null;
-
   type FormValue = {
     general: {
-      fileName: Maybe<string>;
+      fileName: string;
     };
   };
 
@@ -48,7 +46,7 @@
 
   const FORM: FormValue = {
     general: {
-      fileName: null,
+      fileName: TEXT.initial.fileName,
     },
   };
 
@@ -58,6 +56,7 @@
         'general--file-name',
       ) as HTMLInputElement,
     },
+    submit: document.getElementById('submit') as HTMLButtonElement,
   };
 
   // ****
@@ -69,15 +68,21 @@
   main();
 
   function main(): void {
-    $.general.fileName.value = TEXT.initial.fileName;
+    $.general.fileName.value = FORM.general.fileName;
     $.general.fileName.onchange = handleFileNameChange;
+
+    $.submit.onclick = handleSubmit;
   }
 
   // ********
-  // HANDLERS 
+  // HANDLERS
   // ********
   function handleFileNameChange(e: Event): void {
     const currentValue = (e.currentTarget as HTMLInputElement).value;
     FORM.general.fileName = currentValue;
+  }
+
+  function handleSubmit(): void {
+    console.log(FORM);
   }
 })();

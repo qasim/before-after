@@ -23,20 +23,50 @@
           <div>
             <label for="before--file">Before file</label>
             <input
-              type="text"
+              type="file"
               name="before--file"
               id="before--file"
               value=""
             />
           </div>
+          <div>
+            <label for="before--text">Before title</label>
+            <input
+              type="text"
+              name="before--text"
+              id="before--text"
+              value="before"
+            />
+          </div>
+          <div>
+            <label for="after--file">Before file</label>
+            <input
+              type="file"
+              name="after--file"
+              id="after--file"
+              value=""
+            />
+          </div>
+          <div>
+            <label for="after--text">after title</label>
+            <input
+              type="text"
+              name="after--text"
+              id="after--text"
+              value="after"
+            />
+          </div>
 
           <div>
-            <button id="submit" type="submit">Submit</button>(prints to console)
+            <button id="submit" type="submit">Submit</button>
+            <a id="output-img"></a>
           </div>
 
         </div>
       </div>
-      <div class="content"></div>
+      <div class="content">
+        <div id="scale" class="canvas-wrapper"><canvas id="canvas"></canvas></div>
+      </div>
     </div>
     <script src="./src/index.ts"></script>
   </body>

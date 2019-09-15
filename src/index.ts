@@ -106,10 +106,8 @@
     // will work in Safari.
     const resizeObserver = new window.ResizeObserver(entries => {
       const [canvasWrapper] = entries;
-      const {width, height} = canvasWrapper.contentRect;
       setTimeout(() => {
-        $.content.canvas.width = width;
-        $.content.canvas.height = height;
+        setup(canvasWrapper.contentRect);
         draw(Side.before);
         draw(Side.after);
       });
@@ -131,6 +129,7 @@
     $.submit.onclick = handleSubmit;
     $.submit.disabled = true;
 
+    setup($.content.canvasWrapper.getBoundingClientRect());
     draw(Side.before);
     draw(Side.after);
   }
@@ -195,6 +194,16 @@
   //
   // This section contains general utilities.
 
+  function setup(rect: ClientRect) {
+    $.content.canvas.width = rect.width * window.devicePixelRatio;
+    $.content.canvas.height = rect.height * window.devicePixelRatio;
+
+    const ctx = $.content.canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
   function draw(side: Side) {
     clearCanvasSide(side);
     try {
@@ -211,7 +220,7 @@
     const {file} = FORM[side];
     if (file === null) throw new Error('cannot draw without a file');
 
-    const {width} = ctx.canvas;
+    const width = ctx.canvas.width / window.devicePixelRatio;
     const halfCanvas = width / 2;
 
     return getImage(side).then(image =>
@@ -233,7 +242,7 @@
   function drawText(side: Side) {
     const ctx = $.content.canvas.getContext('2d');
     if (!ctx) return;
-    const {width} = ctx.canvas;
+    const width = ctx.canvas.width / window.devicePixelRatio;
     const {text} = FORM[side];
     if (!text) return;
 
@@ -297,7 +306,7 @@
     return newWidth / aspectRatio;
   }
 
-  function validateForm(handler) {
+  function validateForm(handler: Function) {
     return (...args: any[]) => {
       handler(...args);
       if (FORM.general.fileName && FORM.before.file && FORM.after.file)
